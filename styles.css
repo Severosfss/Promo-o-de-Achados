@@ -289,6 +289,30 @@ footer {
     font-size: 1.5rem;
 }
 
+.seguranca-info {
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 1.5rem;
+    margin: 2rem auto;
+    max-width: 800px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.seguranca-info i {
+    font-size: 2rem;
+    color: var(--primary-color);
+}
+
+.seguranca-info p {
+    font-size: 1.1rem;
+    line-height: 1.5;
+    margin: 0;
+}
+
 .footer-bottom {
     text-align: center;
     margin-top: 2rem;
@@ -313,5 +337,15 @@ footer {
 
     .hero h1 {
         font-size: 2rem;
+    }
+
+    .seguranca-info {
+        flex-direction: column;
+        text-align: center;
+        padding: 1rem;
+    }
+
+    .seguranca-info p {
+        font-size: 1rem;
     }
 }
