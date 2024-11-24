@@ -30,16 +30,40 @@
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="./imagens/favicon.png">
     <!-- Favicons -->
-<link rel="icon" type="image/png" sizes="32x32" href="./imagens/favicon.png">
-<link rel="icon" type="image/png" sizes="16x16" href="./imagens/favicon.png">
-<link rel="apple-touch-icon" sizes="180x180" href="./imagens/favicon.png">
-<link rel="shortcut icon" href="./imagens/favicon.png">
-<meta name="msapplication-TileImage" content="./imagens/favicon.png">
-<meta name="msapplication-TileColor" content="#ee4d2d">
-<meta name="theme-color" content="#ee4d2d">
+    <link rel="icon" type="image/png" sizes="32x32" href="./imagens/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./imagens/favicon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="./imagens/favicon.png">
+    <link rel="shortcut icon" href="./imagens/favicon.png">
+    <meta name="msapplication-TileImage" content="./imagens/favicon.png">
+    <meta name="msapplication-TileColor" content="#ee4d2d">
+    <meta name="theme-color" content="#ee4d2d">
     
     <!-- Canonical URL -->
     <link rel="canonical" href="URL_DO_SEU_SITE">
+    
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#ee4d2d">
+    <link rel="apple-touch-icon" href="./imagens/favicon.png">
+    
+    <!-- Preload -->
+    <link rel="preload" href="styles.css" as="style">
+    <link rel="preload" href="script.js" as="script">
+    
+    <script>
+        // Registrar Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('ServiceWorker registrado com sucesso:', registration.scope);
+                    })
+                    .catch(err => {
+                        console.log('Erro ao registrar ServiceWorker:', err);
+                    });
+            });
+        }
+    </script>
 </head>
 <body>
     <header>

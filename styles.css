@@ -5,6 +5,8 @@
     --background-color: #f8f9fa;
     --text-color: #343a40;
     --white: #ffffff;
+    --card-bg: #ffffff;
+    --shadow-color: rgba(0,0,0,0.1);
 }
 
 * {
@@ -114,15 +116,17 @@ nav {
 }
 
 .produto-card {
-    background: var(--white);
+    background: var(--card-bg);
     border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 3px 10px var(--shadow-color);
     transition: transform 0.3s ease;
+    animation: fadeIn 0.5s ease-out;
 }
 
 .produto-card:hover {
     transform: translateY(-5px);
+    box-shadow: 0 5px 15px var(--shadow-color);
 }
 
 .produto-imagem {
@@ -192,10 +196,32 @@ nav {
     border-radius: 5px;
     margin-top: 1rem;
     transition: background-color 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.comprar-button::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    transition: 0.5s;
 }
 
 .comprar-button:hover {
     background-color: var(--secondary-color);
+}
+
+.comprar-button:hover::after {
+    left: 100%;
 }
 
 /* Seção de Categorias */
@@ -320,32 +346,83 @@ footer {
     border-top: 1px solid rgba(255,255,255,0.1);
 }
 
-/* Responsividade */
-@media (max-width: 768px) {
-    nav {
-        flex-direction: column;
-        text-align: center;
+/* Dark Mode */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background-color: #1a1a1a;
+        --text-color: #f8f9fa;
+        --card-bg: #2d2d2d;
+        --shadow-color: rgba(255,255,255,0.1);
     }
 
-    .menu {
-        margin-top: 1rem;
+    .produto-card {
+        background: var(--card-bg);
     }
 
     .menu a {
-        margin: 0.5rem;
+        color: var(--text-color);
+    }
+
+    header {
+        background-color: var(--card-bg);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .produtos-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+        padding: 0 1rem;
+    }
+
+    .hero {
+        padding: 6rem 1rem 3rem;
     }
 
     .hero h1 {
         font-size: 2rem;
     }
 
-    .seguranca-info {
+    nav {
         flex-direction: column;
-        text-align: center;
-        padding: 1rem;
+        padding: 0.5rem;
     }
 
-    .seguranca-info p {
-        font-size: 1rem;
+    .menu {
+        margin-top: 1rem;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
     }
+
+    .menu a {
+        margin: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .produtos-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .categorias-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.lazy {
+    opacity: 0;
+    transition: opacity 0.3s ease-in;
+}
+
+.lazy.loaded {
+    opacity: 1;
 }
