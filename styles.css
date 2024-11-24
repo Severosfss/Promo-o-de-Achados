@@ -1,7 +1,7 @@
 :root {
-    --primary-color: #ee4d2d;
-    --secondary-color: #f53d2d;
-    --accent-color: #ff6b6b;
+    --primary-color: #d42426;
+    --secondary-color: #2c5530;
+    --accent-color: #d4af37;
     --background-color: #f8f9fa;
     --text-color: #343a40;
     --white: #ffffff;
@@ -24,7 +24,8 @@ body {
 
 /* Header e Navegação */
 header {
-    background-color: var(--white);
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-bottom: 3px solid var(--accent-color);
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     position: fixed;
     width: 100%;
@@ -44,12 +45,13 @@ nav {
 .logo {
     font-size: 1.5rem;
     font-weight: bold;
-    color: var(--primary-color);
+    color: var(--white);
+    text-shadow: 0 0 5px rgba(212, 175, 55, 0.5);
 }
 
 .menu a {
     text-decoration: none;
-    color: var(--text-color);
+    color: var(--white);
     margin-left: 2rem;
     transition: color 0.3s ease;
 }
@@ -60,10 +62,31 @@ nav {
 
 /* Seção Hero */
 .hero {
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)),
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" style="font-size:5px"><text y="50%">❄️</text></svg>');
     color: var(--white);
     padding: 8rem 2rem 4rem;
     text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '🎄';
+    position: absolute;
+    left: 5%;
+    top: 50%;
+    font-size: 3rem;
+    transform: translateY(-50%);
+}
+
+.hero::after {
+    content: '🎅';
+    position: absolute;
+    right: 5%;
+    top: 50%;
+    font-size: 3rem;
+    transform: translateY(-50%);
 }
 
 .hero-content {
@@ -84,16 +107,19 @@ nav {
 .cta-button {
     display: inline-block;
     padding: 1rem 2rem;
-    background-color: var(--white);
-    color: var(--primary-color);
+    background: var(--accent-color);
+    color: var(--white);
     text-decoration: none;
     border-radius: 50px;
     font-weight: bold;
     transition: transform 0.3s ease;
+    border: 2px solid var(--white);
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
 }
 
 .cta-button:hover {
     transform: translateY(-3px);
+    background: var(--secondary-color);
 }
 
 /* Seção de Produtos */
@@ -119,14 +145,25 @@ nav {
     background: var(--card-bg);
     border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0 3px 10px var(--shadow-color);
+    box-shadow: 0 5px 15px rgba(212, 175, 55, 0.2);
     transition: transform 0.3s ease;
     animation: fadeIn 0.5s ease-out;
+    border: 2px solid var(--accent-color);
+    position: relative;
+}
+
+.produto-card::before {
+    content: '🎁';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    font-size: 1.5rem;
+    z-index: 2;
 }
 
 .produto-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 5px 15px var(--shadow-color);
+    box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
 }
 
 .produto-imagem {
@@ -149,7 +186,7 @@ nav {
     position: absolute;
     top: 10px;
     right: 10px;
-    background: var(--accent-color);
+    background: var(--primary-color);
     color: var(--white);
     padding: 0.5rem;
     border-radius: 5px;
@@ -189,7 +226,7 @@ nav {
     display: block;
     width: 100%;
     padding: 0.8rem;
-    background-color: var(--primary-color);
+    background: var(--accent-color);
     color: var(--white);
     text-align: center;
     text-decoration: none;
@@ -198,6 +235,8 @@ nav {
     transition: background-color 0.3s ease;
     position: relative;
     overflow: hidden;
+    border: 2px solid var(--white);
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
 }
 
 .comprar-button::after {
@@ -346,13 +385,33 @@ footer {
     border-top: 1px solid rgba(255,255,255,0.1);
 }
 
+/* Animação de Neve */
+@keyframes snowfall {
+    0% {
+        transform: translateY(-100%) translateX(-50%) rotate(0deg);
+    }
+    100% {
+        transform: translateY(100vh) translateX(50%) rotate(360deg);
+    }
+}
+
+.snowflake {
+    position: fixed;
+    color: white;
+    font-size: 1em;
+    text-shadow: 0 0 5px rgba(255,255,255,0.8);
+    animation: snowfall 10s linear infinite;
+    z-index: 1;
+    pointer-events: none;
+}
+
 /* Dark Mode */
 @media (prefers-color-scheme: dark) {
     :root {
         --background-color: #1a1a1a;
         --text-color: #f8f9fa;
         --card-bg: #2d2d2d;
-        --shadow-color: rgba(255,255,255,0.1);
+        --shadow-color: rgba(212, 175, 55, 0.1);
     }
 
     .produto-card {

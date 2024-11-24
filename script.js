@@ -2,6 +2,31 @@
 const ProductModule = {
     produtos: [
         {
+            nome: "Máquina De Cortar Cabelo Para Barba Masculina Designer Aleatório Elétrico Profissional",
+            preco: 16.99,
+            precoOriginal: 100.00,
+            precoMaximo: 19.99,
+            precoMaximoOriginal: 100.00,
+            desconto: 83,
+            imagem: "./imagens/9.jpg",
+            link: "https://s.shopee.com.br/1ViDSpVZIh",
+            categoria: "casa",
+            variacoes: true
+        },
+        {
+            nome: "Kit 3 Garrafa Agua Squeeze Galão Com Adesivos Lembretes beber Agua",
+            preco: 23.90,
+            precoOriginal: 99.00,
+            desconto: 76,
+            imagem: "./imagens/8.jpg",
+            link: "https://s.shopee.com.br/8UrxnDclIg",
+            categoria: "casa",
+            parcelas: {
+                quantidade: 4,
+                valor: 6.03
+            }
+        },
+        {
             nome: "Caixa Kit Com 300 Lenços/Toalhas Umedecida Kit Higiene Bebe Promoção",
             preco: 7.99,
             precoOriginal: 9.50,
@@ -55,6 +80,15 @@ const ProductModule = {
             desconto: 50,
             imagem: "./imagens/1.jpg",
             link: "https://s.shopee.com.br/LWDzqbTTP",
+            categoria: "casa"
+        },
+        {
+            nome: "Pano de prato estampado com bainha",
+            preco: 18.07,
+            precoOriginal: 19.97,
+            desconto: 10,
+            imagem: "./imagens/10.jpg",
+            link: "https://s.shopee.com.br/2qDb3xinEf",
             categoria: "casa"
         }
     ],
@@ -216,10 +250,55 @@ const ErrorModule = {
     }
 };
 
+// Snow Effect Module
+const SnowModule = {
+    init() {
+        this.createSnowflakes();
+    },
+
+    createSnowflakes() {
+        const numberOfSnowflakes = 50;
+        
+        for (let i = 0; i < numberOfSnowflakes; i++) {
+            const snowflake = document.createElement('div');
+            snowflake.className = 'snowflake';
+            snowflake.innerHTML = '❄';
+            snowflake.style.left = `${Math.random() * 100}vw`;
+            snowflake.style.animationDuration = `${Math.random() * 3 + 8}s`;
+            snowflake.style.opacity = Math.random();
+            snowflake.style.fontSize = `${Math.random() * 10 + 10}px`;
+            document.body.appendChild(snowflake);
+
+            // Remove snowflake after animation
+            snowflake.addEventListener('animationend', () => {
+                snowflake.remove();
+                this.createOneSnowflake();
+            });
+        }
+    },
+
+    createOneSnowflake() {
+        const snowflake = document.createElement('div');
+        snowflake.className = 'snowflake';
+        snowflake.innerHTML = '❄';
+        snowflake.style.left = `${Math.random() * 100}vw`;
+        snowflake.style.animationDuration = `${Math.random() * 3 + 8}s`;
+        snowflake.style.opacity = Math.random();
+        snowflake.style.fontSize = `${Math.random() * 10 + 10}px`;
+        document.body.appendChild(snowflake);
+
+        snowflake.addEventListener('animationend', () => {
+            snowflake.remove();
+            this.createOneSnowflake();
+        });
+    }
+};
+
 // Initialize application
 document.addEventListener('DOMContentLoaded', () => {
     try {
         UIModule.init();
+        SnowModule.init();
     } catch (error) {
         ErrorModule.handleError(error, 'application initialization');
     }
